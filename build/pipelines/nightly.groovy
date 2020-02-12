@@ -33,6 +33,7 @@ pipeline {
                     // This is important, we need clone into different folder here,
                     // Because, as part of tag based pull, we will be cloning same repo again
                     echo env.getProperty("myParamName")
+                    echo "Vaishali k"
                 }
             }
         }
