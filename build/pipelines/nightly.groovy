@@ -32,9 +32,7 @@ pipeline {
                 script {
                     // This is important, we need clone into different folder here,
                     // Because, as part of tag based pull, we will be cloning same repo again
-                    dir('scm') {
-                        //checkout scm
-                    }
+                    echo env.getProperty("myParamName")
                 }
             }
         }
