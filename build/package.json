@@ -1,0 +1,35 @@
+{
+    "package_name": "com_tjreports",
+    "core_files": {
+        "src": "./tjreports/*",
+        "dest": "builds/"
+    },
+    "subextensions": [
+        {
+            "name": "plg_system_sendemail",
+            "repoUrl": "git@github.com:techjoomla/plg_system_sendemail.git",
+            "src": "./*",
+            "dest": "builds/plugins/system/tjsendemail",
+            "format": "folder"
+        },
+        {
+            "name": "plg_api_tjreports",
+            "repoUrl": "git@github.com:techjoomla/plg_api_tjreports.git",
+            "src": "./*",
+            "dest": "builds/plugins/api/reports",
+            "format": "folder"
+        },
+    ],
+    "versions": {
+      "1.1.5":{
+        "plg_system_sendemail": {
+          "version": "1.1.0",
+          "branch": "master"
+        },
+        "plg_api_tjreports": {
+          "version": "release-1.1.0",
+          "branch": "release-1.1.0"
+        }
+      }
+    }
+}
