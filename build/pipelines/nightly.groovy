@@ -4,6 +4,7 @@
 // TODO - remove hardcoded value
 def  version = '2.4.0' //env.getProperty("version")
 echo version
+ echo "Vaishali k"
 
 pipeline {
     agent any
