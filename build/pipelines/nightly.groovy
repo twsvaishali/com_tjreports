@@ -17,8 +17,7 @@ pipeline {
                     // Cleanup jlike git folder, files
                     sh("rm -rf .git")
                     sh("rm -rf .gitlab/merge_request_templates")
-                    sh("rm -rf build")
-
+                   
                     // Make directories needed to generate build
                     sh("mkdir builds")
                 }
