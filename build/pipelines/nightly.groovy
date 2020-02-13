@@ -127,7 +127,7 @@ pipeline {
                     // // @TODO - needs to define shortGitCommit at global level
                     def gitCommit      = ''
                     def shortGitCommit = ''
-                    def props = readJSON file: 'scm/build/package.json'
+                    def props = readJSON file: 'build/package.json'
 
                     // // For branch based build - we need the revision number of tag checked out,
                     // Custom DIR
