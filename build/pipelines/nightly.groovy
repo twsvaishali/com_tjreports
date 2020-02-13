@@ -3,7 +3,8 @@
 // Get / Set release name
 // TODO - remove hardcoded value
 def  version = '1.1.5' //env.getProperty("version")
-def  branchOrTag = env.getProperty("BRANCH");
+echo version
+
 pipeline {
     agent any
     stages {
@@ -11,24 +12,37 @@ pipeline {
             steps {
                 script {
                     // Cleanup previous stuff
-                   // sh("rm -rf " + branchOrTag )
+                    sh("rm -rf scm")
                     sh("rm -rf builds")
 
                     // Cleanup jlike git folder, files
                     sh("rm -rf .git")
                     sh("rm -rf .gitlab/merge_request_templates")
-                   
+                    sh("rm -rf build")
+
                     // Make directories needed to generate build
                     sh("mkdir builds")
+                    sh("mkdir scm")
                 }
             }
         }
 
-       
+        stage('Checkout') {
+            steps {
+                script {
+                    // This is important, we need clone into different folder here,
+                    // Because, as part of tag based pull, we will be cloning same repo again
+                    dir('scm') {
+                        checkout scm
+                    }
+                }
+            }
+        }
+
         stage('Cleanup-repos') {
             steps {
                 script {
-                    def props = readJSON file: 'build/package.json'
+                    def props = readJSON file: 'scm/build/package.json'
 
                     props['subextensions'].eachWithIndex { item, index ->
                        // cleaup subextensions
@@ -42,7 +56,7 @@ pipeline {
         stage('Init') {
             steps {
                 script {
-                    def props = readJSON file: 'build/package.json'
+                    def props = readJSON file: 'scm/build/package.json'
 
                     // Do clone all subextensions repos by checking out corresponding release branch
                     props['subextensions'].eachWithIndex { item, index ->
@@ -55,7 +69,7 @@ pipeline {
         stage('Copy files & Make zip of subextension') {
             steps {
                 script {
-                    def props = readJSON file: 'build/package.json'
+                    def props = readJSON file: 'scm/build/package.json'
 
                     // Copy core files
                     sh("cp -r " + props["core_files"].src + " " + props['core_files'].dest)
@@ -127,7 +141,7 @@ pipeline {
                     // // @TODO - needs to define shortGitCommit at global level
                     def gitCommit      = ''
                     def shortGitCommit = ''
-                    def props = readJSON file: 'build/package.json'
+                    def props = readJSON file: 'scm/build/package.json'
 
                     // // For branch based build - we need the revision number of tag checked out,
                     // Custom DIR
@@ -156,4 +170,3 @@ pipeline {
          }
     }
 }
-
