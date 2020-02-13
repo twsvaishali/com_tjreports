@@ -8,14 +8,14 @@
         {
             "name": "plg_system_sendemail",
             "repoUrl": "git@github.com:techjoomla/plg_system_sendemail.git",
-            "src": "./*",
+            "src": "./plg_system_sendemail/*",
             "dest": "builds/plugins/system/tjsendemail",
             "format": "folder"
         },
         {
             "name": "plg_api_tjreports",
             "repoUrl": "git@github.com:techjoomla/plg_api_tjreports.git",
-            "src": "./*",
+            "src": "./plg_api_tjreports/*",
             "dest": "builds/plugins/api/reports",
             "format": "folder"
         },
